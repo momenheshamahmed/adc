@@ -1,0 +1,37 @@
+# LLM Provider Configuration
+# Options: ollama | moonshot | openai | anthropic | groq | openrouter | together | azure
+LLM_PROVIDER=anthropic
+
+# For Anthropic (Claude)
+LLM_API_KEY=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
+LLM_MODEL=claude-sonnet-4-20250514
+
+# For Ollama (local)
+# LLM_PROVIDER=ollama
+# LLM_BASE_URL=https://ollama.observer.studio
+# LLM_API_KEY=ollama
+# LLM_MODEL=llama3.2
+
+# For Moonshot (Kimi)
+# LLM_PROVIDER=moonshot
+# LLM_BASE_URL=https://api.moonshot.ai/v1
+# LLM_API_KEY=your_moonshot_api_key
+# LLM_MODEL=moonshot-v1-8k
+
+# For OpenAI
+# LLM_PROVIDER=openai
+# LLM_BASE_URL=https://api.openai.com/v1
+# LLM_API_KEY=your_openai_api_key
+# LLM_MODEL=gpt-4o-mini
+
+# AI Assist Mode (Phase 2 toggle)
+ENABLE_AI_ASSIST=true
+
+# Image Generation (Nano Banana / Gemini)
+# Get your API key from https://aistudio.google.com/apikey
+GEMINI_API_KEY=AIzaSyAnlnjOqcGBMUNSf4h4E71gDQ2lYA-gxGI
+GEMINI_IMAGE_MODEL=gemini-2.5-flash-image
+
+# Database (Supabase PostgreSQL)
+# Get your connection string from: Supabase Dashboard → Settings → Database → Connection string (URI)
+DATABASE_URL=postgresql://postgres.szkomahluyruxotxsbin:qywwim-Sebvos-5nyzpi@aws-1-eu-west-1.pooler.supabase.com:6543/postgres
