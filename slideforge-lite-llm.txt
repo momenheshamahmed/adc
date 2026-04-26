@@ -1,0 +1,7 @@
+LLM_PROVIDER=openai
+LLM_BASE_URL=https://litellm-proxy-209961497089.me-central2.run.app
+LLM_API_KEY=sk-DZRVr0OazDvDNml-3gVs3Q
+LLM_MODEL=glm-4.7
+LLM_FAST_MODEL=glm-4.7
+LLM_REASONING_MODEL=gpt-oss-120b
+LLM_VISION_MODEL=qwen3-vision
