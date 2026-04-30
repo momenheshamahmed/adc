@@ -1,119 +1,675 @@
+Push event to branch main
+Started by GitLab push by Momen.Osman
+Querying the current revision of branch main...
+Current revision of branch main is 9d39799845fb9906be6de7ece4d946e69cfcc2c8
+Obtained Jenkinsfile from 9d39799845fb9906be6de7ece4d946e69cfcc2c8
+Loading library my-shared-library@main
+Attempting to resolve main from remote references...
+ > git --version # timeout=10
+ > git --version # 'git version 2.39.5'
+using GIT_ASKPASS to set credentials GITLAB_CRED (Created By Madhu)
+ > git ls-remote -h -- https://gitlab-dev.ad.aramcodigital.com/adc-lab/my-shared-library.git # timeout=10
+Found match: refs/heads/main revision fd8385d214dc5c9b381cf2d75edb804375c8ae1a
+The recommended git tool is: NONE
+using credential GITLAB_CRED
+ > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/opment_aramco-digital-react_main@libs/a9d84ac3ceb2ec9a9518129b8c5e1b6e572325ea1fccf335ed777cc7d9d4446f/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://gitlab-dev.ad.aramcodigital.com/adc-lab/my-shared-library.git # timeout=10
+Fetching without tags
+Fetching upstream changes from https://gitlab-dev.ad.aramcodigital.com/adc-lab/my-shared-library.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.39.5'
+using GIT_ASKPASS to set credentials GITLAB_CRED (Created By Madhu)
+ > git fetch --no-tags --force --progress -- https://gitlab-dev.ad.aramcodigital.com/adc-lab/my-shared-library.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+Checking out Revision fd8385d214dc5c9b381cf2d75edb804375c8ae1a (main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f fd8385d214dc5c9b381cf2d75edb804375c8ae1a # timeout=10
+Commit message: "Update file blackduckScanPython.groovy"
+ > git rev-list --no-walk fd8385d214dc5c9b381cf2d75edb804375c8ae1a # timeout=10
+[GitLab Pipeline Status] Notifying branch build status: RUNNING adc-solutions-development/build/adc-solutions-development/adc-solutions-development%2Faramco-digital-react/main #5: Build started...
+[GitLab Pipeline Status] Notified
+[Pipeline] Start of Pipeline
+[Pipeline] echo
+[WARNING] label option is deprecated. To use a static pod template, use the 'inheritFrom' option.
+[Pipeline] podTemplate
+[Pipeline] {
+[Pipeline] node
+Agent jenkins-agent-webapp-rqfpw
+ is provisioned from template jenkins-agent-webapp
+---
+apiVersion: "v1"
+kind: "Pod"
+metadata:
+  annotations:
+    kubernetes.jenkins.io/last-refresh: "1777545673112"
+  labels:
+    jenkins: "slave"
+    jenkins/label-digest: "c19fbc4453125b49ad1bbd353ca13257c0153ceb"
+    jenkins/label: "jenkins-agent-webapp"
+    kubernetes.jenkins.io/controller: "http___jenkins_jenkins-dev_svc_cluster_local_8080x"
+  name: "jenkins-agent-webapp-rqfpw"
+  namespace: "jenkins-dev"
+spec:
+  containers:
+  - args:
+    - "9999999"
+    command:
+    - "sleep"
+    image: "me-central2-docker.pkg.dev/prj-adc-gcp-devsecops/adc-jenkins-agents-img/kaniko-executor:v1.24.0-debug"
+    imagePullPolicy: "IfNotPresent"
+    name: "kaniko"
+    resources: {}
+    tty: false
+    volumeMounts:
+    - mountPath: "/home/jenkins/agent"
+      name: "workspace-volume"
+      readOnly: false
+    workingDir: "/home/jenkins/agent"
+  - args:
+    - "9999999"
+    command:
+    - "sleep"
+    image: "me-central2-docker.pkg.dev/prj-adc-gcp-devsecops/adc-jenkins-agents-img/blackduck-img:11.0.0"
+    imagePullPolicy: "IfNotPresent"
+    name: "blackduck-agent"
+    resources: {}
+    tty: false
+    volumeMounts:
+    - mountPath: "/home/jenkins/agent"
+      name: "workspace-volume"
+      readOnly: false
+    workingDir: "/home/jenkins/agent"
+  - command:
+    - "/jenkins-agent/jenkins-agent"
+    env:
+    - name: "JENKINS_SECRET"
+      value: "********"
+    - name: "JENKINS_TUNNEL"
+      value: "jenkins-agent.jenkins-dev.svc.cluster.local:50000"
+    - name: "JENKINS_AGENT_NAME"
+      value: "jenkins-agent-webapp-rqfpw"
+    - name: "JENKINS_AGENT_FILE"
+      value: "/jenkins-agent/agent.jar"
+    - name: "REMOTING_OPTS"
+      value: "-noReconnectAfter 1d"
+    - name: "JENKINS_NAME"
+      value: "jenkins-agent-webapp-rqfpw"
+    - name: "JENKINS_AGENT_WORKDIR"
+      value: "/home/jenkins/agent"
+    - name: "JENKINS_URL"
+      value: "http://jenkins.jenkins-dev.svc.cluster.local:8080/"
+    image: "me-central2-docker.pkg.dev/prj-adc-gcp-devsecops/adc-jenkins-custom-img/jenkins/inbound-agent:v6"
+    imagePullPolicy: "IfNotPresent"
+    name: "jnlp"
+    resources: {}
+    tty: false
+    volumeMounts:
+    - mountPath: "/home/jenkins/agent"
+      name: "workspace-volume"
+      readOnly: false
+    - mountPath: "/jenkins-agent"
+      name: "jenkins-agent"
+      readOnly: true
+    workingDir: "/home/jenkins/agent"
+  - args:
+    - "9999999"
+    command:
+    - "sleep"
+    image: "me-central2-docker.pkg.dev/prj-adc-gcp-devsecops/adc-jenkins-agents-img/coverity-img:java25-v2.0"
+    imagePullPolicy: "IfNotPresent"
+    name: "coverity-agent"
+    resources: {}
+    tty: false
+    volumeMounts:
+    - mountPath: "/home/jenkins/agent"
+      name: "workspace-volume"
+      readOnly: false
+    workingDir: "/home/jenkins/agent"
+  - args:
+    - "9999999"
+    command:
+    - "sleep"
+    image: "me-central2-docker.pkg.dev/prj-adc-gcp-devsecops/adc-jenkins-agents-img/sdk-img:v1.0"
+    imagePullPolicy: "IfNotPresent"
+    name: "sdk-agent"
+    resources: {}
+    tty: false
+    volumeMounts:
+    - mountPath: "/home/jenkins/agent"
+      name: "workspace-volume"
+      readOnly: false
+    workingDir: "/home/jenkins/agent"
+  hostNetwork: false
+  initContainers:
+  - command:
+    - "/bin/sh"
+    - "-c"
+    - "cp $(command -v jenkins-agent) /jenkins-agent/jenkins-agent;cp -R /usr/share/jenkins/.\
+      \ /jenkins-agent"
+    image: "jenkins/inbound-agent:3345.v03dee9b_f88fc-1"
+    name: "set-up-jenkins-agent"
+    volumeMounts:
+    - mountPath: "/jenkins-agent"
+      name: "jenkins-agent"
+  nodeSelector:
+    cloud.google.com/gke-nodepool: "npool-jenkins-agent-ext-std-01"
+  restartPolicy: "Never"
+  serviceAccountName: "jenkins-ksa"
+  volumes:
+  - emptyDir:
+      medium: ""
+    name: "workspace-volume"
+  - emptyDir: {}
+    name: "jenkins-agent"
+hostAliases:
+- ip: "10.245.1.130"
+  hostnames:
+  - "cnc.ad.aramcodigital.com"
+- ip: "10.245.1.155"
+  hostnames:
+  - "blackduck.ad.aramcodigital.com"
+
+Running on jenkins-agent-webapp-rqfpw
+ in /home/jenkins/agent/workspace/opment_aramco-digital-react_main
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+The recommended git tool is: NONE
+using credential GITLAB_CRED
+Cloning the remote Git repository
+Cloning with configured refspecs honoured and without tags
+Cloning repository https://gitlab-dev.ad.aramcodigital.com/adc-solutions-development/aramco-digital-react.git
+ > git init /home/jenkins/agent/workspace/opment_aramco-digital-react_main # timeout=10
+Fetching upstream changes from https://gitlab-dev.ad.aramcodigital.com/adc-solutions-development/aramco-digital-react.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.39.5'
+using GIT_ASKPASS to set credentials GITLAB_CRED (Created By Madhu)
+ > git fetch --no-tags --force --progress -- https://gitlab-dev.ad.aramcodigital.com/adc-solutions-development/aramco-digital-react.git +refs/heads/main:refs/remotes/origin/main # timeout=10
+Avoid second fetch
+Checking out Revision 9d39799845fb9906be6de7ece4d946e69cfcc2c8 (main)
+ > git config remote.origin.url https://gitlab-dev.ad.aramcodigital.com/adc-solutions-development/aramco-digital-react.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/main:refs/remotes/origin/main # timeout=10
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 9d39799845fb9906be6de7ece4d946e69cfcc2c8 # timeout=10
+Commit message: "Sync repository contents from the sibling aramco-digital-react codebase."
+ > git rev-list --no-walk 41f38d09d21e3ded1851d1e8eaa2c52b299106d3 # timeout=10
+[GitLab Pipeline Status] Notifying branch build status: RUNNING adc-solutions-development/build/adc-solutions-development/adc-solutions-development%2Faramco-digital-react/main #5: Build started...
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Coverity Scan)
+[Pipeline] container
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
++ echo [Coverity] Starting scan...
+[Coverity] Starting scan...
++ export PATH=/opt/coverity/cov-analysis-linux64-2025.9.0/bin:/opt/coverity/cov-analysis-linux64-2025.9.0/bin:/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
++ cd /home/jenkins/agent/workspace/opment_aramco-digital-react_main
++ [ -f /home/jenkins/.coverity/authkeys/ak-cnc.ad.aramcodigital.com-443 ]
++ chmod 600 /home/jenkins/.coverity/authkeys/ak-cnc.ad.aramcodigital.com-443
++ /opt/coverity/cov-analysis-linux64-2025.9.0/bin/cov-configure --javascript
+
+Generated coverity_config.xml at location /opt/coverity/cov-analysis-linux64-2025.9.0/config/coverity_config.xml
+Successfully generated configuration for the buildless capture patterns: capture-config-files html javascript jsx typescript vue
++ /opt/coverity/cov-analysis-linux64-2025.9.0/bin/cov-configure --typescript
+[WARNING] Configuration already exists for file regex ^.*(\.(ts|tsx|cts|mts)$)|(tsconfig.json)$
+          and it will not be updated.
++ /opt/coverity/cov-analysis-linux64-2025.9.0/bin/cov-configure --python
+
+Generated coverity_config.xml at location /opt/coverity/cov-analysis-linux64-2025.9.0/config/coverity_config.xml
+Successfully generated configuration for the buildless capture patterns: capture-config-files python
++ echo [Coverity] Build & Capture and analyze the Source code...
+[Coverity] Build & Capture and analyze the Source code...
++ /opt/coverity/cov-analysis-linux64-2025.9.0/bin/coverity capture --dir cov-int --project-dir /home/jenkins/agent/workspace/opment_aramco-digital-react_main
+[INFO] coverity 2025.9.0 covcli-2025.9-push-12
+[INFO] Detected that stdout is not connected to a terminal.  Defaulting ticker mode to 'none'.
+[INFO] If this is not correct, explicitly set the ticker mode to the desired value using the '--ticker-mode' option.
+[INFO] Executing command: /opt/coverity/cov-analysis-linux64-2025.9.0/bin/cov-manage-emit --dir /home/jenkins/agent/workspace/opment_aramco-digital-react_main/cov-int create
+[INFO] Telemetry is enabled
+[INFO] Executing command: /opt/coverity/cov-analysis-linux64-2025.9.0/bin/cov-manage-emit --dir /home/jenkins/agent/workspace/opment_aramco-digital-react_main/cov-int list-capture-diagnostics
+[INFO] Executing action no-op: nothing to do for initialization
+[INFO] Executing action Delete compiler configurations for intermediate directory '/home/jenkins/agent/workspace/opment_aramco-digital-react_main/cov-int'
+[INFO] Executing action Configure build compiler: /opt/coverity/cov-analysis-linux64-2025.9.0/bin/cov-configure -c /home/jenkins/agent/workspace/opment_aramco-digital-react_main/cov-int/coverity-cli/build-compiler-configs/coverity_config.xml --compiler gcc --comptype gcc --template
+[INFO] Executing action Configure build compiler: /opt/coverity/cov-analysis-linux64-2025.9.0/bin/cov-configure -c /home/jenkins/agent/workspace/opment_aramco-digital-react_main/cov-int/coverity-cli/build-compiler-configs/coverity_config.xml --compiler cc --comptype gcc --template
+[WARNING] Template config template-gcc-config-1 already exists for gcc-* and will be reused. 
+[WARNING] Template config template-gcc-config-2 already exists for *-gcc and will be reused. 
+[WARNING] Template config template-g++-config-1 already exists for g++-* and will be reused. 
+[WARNING] Template config template-g++-config-2 already exists for *-g++ and will be reused. 
+[WARNING] Template config template-ld-config-0 already exists for ld and will be reused. 
+[WARNING] Template config template-ar-config-0 already exists for ar and will be reused. 
+[INFO] Executing action Configure build compiler: /opt/coverity/cov-analysis-linux64-2025.9.0/bin/cov-configure -c /home/jenkins/agent/workspace/opment_aramco-digital-react_main/cov-int/coverity-cli/build-compiler-configs/coverity_config.xml --compiler c++ --comptype g++ --template
+[INFO] Executing action Configure build compiler: /opt/coverity/cov-analysis-linux64-2025.9.0/bin/cov-configure -c /home/jenkins/agent/workspace/opment_aramco-digital-react_main/cov-int/coverity-cli/build-compiler-configs/coverity_config.xml --compiler clang --comptype clangcc --template
+[INFO] Executing action Configure build compiler: /opt/coverity/cov-analysis-linux64-2025.9.0/bin/cov-configure -c /home/jenkins/agent/workspace/opment_aramco-digital-react_main/cov-int/coverity-cli/build-compiler-configs/coverity_config.xml --compiler java --comptype java --template
+[INFO] Executing action Configure build compiler: /opt/coverity/cov-analysis-linux64-2025.9.0/bin/cov-configure -c /home/jenkins/agent/workspace/opment_aramco-digital-react_main/cov-int/coverity-cli/build-compiler-configs/coverity_config.xml --compiler go --comptype go --template
+[INFO] Executing action Configure build compiler: /opt/coverity/cov-analysis-linux64-2025.9.0/bin/cov-configure -c /home/jenkins/agent/workspace/opment_aramco-digital-react_main/cov-int/coverity-cli/build-compiler-configs/coverity_config.xml --compiler ccache --comptype prefix --template
+[INFO] Executing action Configure build compiler: /opt/coverity/cov-analysis-linux64-2025.9.0/bin/cov-configure -c /home/jenkins/agent/workspace/opment_aramco-digital-react_main/cov-int/coverity-cli/build-compiler-configs/coverity_config.xml --compiler kotlinc --comptype kotlinc --template
+[WARNING] Template config template-java-config-0 already exists for java and will be reused. 
+[WARNING] Template config template-apt-config-0 already exists for apt and will be reused. 
+[WARNING] Template config template-javaw-config-0 already exists for javaw and will be reused. 
+[INFO] Executing action Configure build compiler: /opt/coverity/cov-analysis-linux64-2025.9.0/bin/cov-configure -c /home/jenkins/agent/workspace/opment_aramco-digital-react_main/cov-int/coverity-cli/build-compiler-configs/coverity_config.xml --compiler csc --comptype csc --template
+[INFO] Executing action Configure build compiler: /opt/coverity/cov-analysis-linux64-2025.9.0/bin/cov-configure -c /home/jenkins/agent/workspace/opment_aramco-digital-react_main/cov-int/coverity-cli/build-compiler-configs/coverity_config.xml --compiler vbc --comptype vbc --template
+[WARNING] Template config template-dotnet-config-0 already exists for dotnet and will be reused. 
+[INFO] Executing action Configure build compiler: /opt/coverity/cov-analysis-linux64-2025.9.0/bin/cov-configure -c /home/jenkins/agent/workspace/opment_aramco-digital-react_main/cov-int/coverity-cli/build-compiler-configs/coverity_config.xml --compiler cl --comptype msvc --template
+[INFO] Executing action Configure build compiler: /opt/coverity/cov-analysis-linux64-2025.9.0/bin/cov-configure -c /home/jenkins/agent/workspace/opment_aramco-digital-react_main/cov-int/coverity-cli/buildless-compiler-configs/coverity_config.xml --dart
+[INFO] Executing action Configure build compiler: /opt/coverity/cov-analysis-linux64-2025.9.0/bin/cov-configure -c /home/jenkins/agent/workspace/opment_aramco-digital-react_main/cov-int/coverity-cli/buildless-compiler-configs/coverity_config.xml --javascript
+[INFO] Executing action Configure build compiler: /opt/coverity/cov-analysis-linux64-2025.9.0/bin/cov-configure -c /home/jenkins/agent/workspace/opment_aramco-digital-react_main/cov-int/coverity-cli/buildless-compiler-configs/coverity_config.xml --php
+[INFO] Executing action Configure build compiler: /opt/coverity/cov-analysis-linux64-2025.9.0/bin/cov-configure -c /home/jenkins/agent/workspace/opment_aramco-digital-react_main/cov-int/coverity-cli/buildless-compiler-configs/coverity_config.xml --python
+[INFO] Executing action Configure build compiler: /opt/coverity/cov-analysis-linux64-2025.9.0/bin/cov-configure -c /home/jenkins/agent/workspace/opment_aramco-digital-react_main/cov-int/coverity-cli/buildless-compiler-configs/coverity_config.xml --ruby
+[INFO] Executing action Configure build compiler: /opt/coverity/cov-analysis-linux64-2025.9.0/bin/cov-configure -c /home/jenkins/agent/workspace/opment_aramco-digital-react_main/cov-int/coverity-cli/buildless-compiler-configs/coverity_config.xml --java-buildless
+[INFO] Executing action Configure build compiler: /opt/coverity/cov-analysis-linux64-2025.9.0/bin/cov-configure -c /home/jenkins/agent/workspace/opment_aramco-digital-react_main/cov-int/coverity-cli/buildless-compiler-configs/coverity_config.xml --comptype capture-config-files --file-regex $capture-config-files$ --template
+[WARNING] Configuration already exists for file regex $capture-config-files$
+          and it will not be updated.
+[INFO] Executing action Configure build compiler: /opt/coverity/cov-analysis-linux64-2025.9.0/bin/cov-configure -c /home/jenkins/agent/workspace/opment_aramco-digital-react_main/cov-int/coverity-cli/buildless-compiler-configs/coverity_config.xml --cs-buildless
+Skipping generation of coverity scan configuration because a configuration has already been generated
+[INFO] Executing action no-op: no compilers need to be unconfigured
+[INFO] Executing action no-op: compiler configurations loaded
+[INFO] Executing action Emit files using buildless capture: /opt/coverity/cov-analysis-linux64-2025.9.0/bin/cov-internal-capture-files --dir /home/jenkins/agent/workspace/opment_aramco-digital-react_main/cov-int -c /home/jenkins/agent/workspace/opment_aramco-digital-react_main/cov-int/coverity-cli/buildless-compiler-configs/coverity_config.xml --ticker-mode none --append-log --capture-list-file /home/jenkins/agent/workspace/opment_aramco-digital-react_main/cov-int/coverity-cli/capture-file-list-3698123151
+[INFO] Buildless capture started.
+[INFO] Emitting 180 Files.
+[INFO] Buildless capture completed.
+[INFO] Executing action No unwanted TUs to delete
+[INFO] Executing action Action cleanup: Unwanted TUs action cleanup
+[INFO] Executing action deleteResidualTUs /home/jenkins/agent/workspace/opment_aramco-digital-react_main/cov-int
+[INFO] Executing command: /opt/coverity/cov-analysis-linux64-2025.9.0/bin/cov-manage-emit --dir /home/jenkins/agent/workspace/opment_aramco-digital-react_main/cov-int list-capture-diagnostics
+[INFO] Executing action Invalidate capture results
+[INFO] Executing action Invoke cov-security-da: /opt/coverity/cov-analysis-linux64-2025.9.0/bin/cov-security-da --dir /home/jenkins/agent/workspace/opment_aramco-digital-react_main/cov-int --ticker-mode none
+[INFO] Executing command: /opt/coverity/cov-analysis-linux64-2025.9.0/bin/cov-manage-emit --dir /home/jenkins/agent/workspace/opment_aramco-digital-react_main/cov-int list-capture-diagnostics
+Capture summary:
+    SUCCEEDED: 180
+    INCOMPLETE: 0
+    FAILED: 0
+    IGNORED: 245
+    FILES CAPTURED: 180
+    LINES OF CODE: 50914
+[INFO] Capture phase took 44.648s.
+[INFO] To analyze your project, type '/opt/coverity/cov-analysis-linux64-2025.9.0/bin/coverity analyze --project-dir /home/jenkins/agent/workspace/opment_aramco-digital-react_main --dir cov-int'.
++ /opt/coverity/cov-analysis-linux64-2025.9.0/bin/cov-analyze --dir cov-int --all
+Coverity Static Analysis version 2025.9.0 on Linux 6.6.105+ x86_64
+Internal version numbers: 477d3c5ddd p-2025.9-push-57
+
+Using 4 workers as limited by CPU(s)
+Looking for translation units
+|0----------25-----------50----------75---------100|
+****************************************************
+[STATUS] Computing links for 185 translation units
+|0----------25-----------50----------75---------100|
+****************************************************
+[STATUS] Detecting duplicate files
+|0----------25-----------50----------75---------100|
+****************************************************
+[STATUS] Computing virtual overrides
+|0----------25-----------50----------75---------100|
+****************************************************
+[STATUS] Computing callgraph
+|0----------25-----------50----------75---------100|
+****************************************************
+[STATUS] Topologically sorting 882 functions
+|0----------25-----------50----------75---------100|
+****************************************************
+[STATUS] Preparing for source code analysis
+|0----------25-----------50----------75---------100|
+****************************************************
+[STATUS] Running Sigma analysis
+[STATUS] Computing node costs
+|0----------25-----------50----------75---------100|
+****************************************************
+[STATUS] Running analysis
+|0----------25-----------50----------75---------100|
+****************************************************
+[STATUS] Computing callgraph metrics for 3914 functions
+|0----------25-----------50----------75---------100|
+****************************************************
+[STATUS] Exporting summaries
+|0----------25-----------50----------75---------100|
+****************************************************
+Analysis summary report:
+------------------------
+Files analyzed                 : 179 Total
+    JavaScript                 : 6
+    Text                       : 24
+    TypeScript                 : 149
+Total LoC input to cov-analyze : 43406
+Functions analyzed             : 877
+Paths analyzed                 : 19604
+Time taken by analysis         : 00:01:01
+Defect occurrences found       : 4 Total
+                                 1 IDENTICAL_BRANCHES
+                                 1 SIGMA.custom_resource_in_default_namespace
+                                 2 SIGMA.unsafe_innerhtml_manipulation
+
++ /opt/coverity/cov-analysis-linux64-2025.9.0/bin/cov-commit-defects --dir cov-int --url https://cnc.ad.aramcodigital.com:443 --stream adc-website --auth-key-file /home/jenkins/.coverity/authkeys/ak-cnc.ad.aramcodigital.com-443
+Coverity Defect Commit Client version 2025.9.0 on Linux 6.6.105+ x86_64
+Internal version numbers: 477d3c5ddd p-2025.9-push-57
+
+[STATUS] 2026-04-30 10:43:35 UTC - Committing 3 defect files...
+|0----------25-----------50----------75---------100|
+****************************************************
+[STATUS] 2026-04-30 10:43:35 UTC - Committing 180 file descriptions...
+|0----------25-----------50----------75---------100|
+****************************************************
+[STATUS] 2026-04-30 10:43:39 UTC - Committing 22 source files...
+|0----------25-----------50----------75---------100|
+****************************************************
+[STATUS] 2026-04-30 10:43:35 UTC - Calculating 180 cross-reference bundles...
+|0----------25-----------50----------75---------100|
+****************************************************
+[STATUS] 2026-04-30 10:43:40 UTC - Committing 149 cross-reference bundles...
+|0----------25-----------50----------75---------100|
+****************************************************
+[STATUS] 2026-04-30 10:43:41 UTC - Committing 877 functions...
+|0----------25-----------50----------75---------100|
+****************************************************
+[STATUS] 2026-04-30 10:43:42 UTC - Committing 3 defect files...
+|0----------25-----------50----------75---------100|
+****************************************************
+[STATUS] 2026-04-30 10:43:42 UTC - Committing 4 output files...
+|0----------25-----------50----------75---------100|
+****************************************************
+[STATUS] 2026-04-30 10:43:42 UTC - Sending hashes for 1165 summaries...
+|0----------25-----------50----------75---------100|
+****************************************************
+[STATUS] 2026-04-30 10:43:45 UTC - Committing 22 summaries...
+|0----------25-----------50----------75---------100|
+****************************************************
+New snapshot ID 10985 added.
+Updates to Coverity Analysis are available.  The installation of the updates is optional.  These updates will be integrated in the next major release.
+Please run "cov-install-updates list <connection options>" for a list of available updates and a brief description of the content of each update.
+Please run "cov-install-updates install <connection options>" to apply the updates to Coverity Analysis.
+Elapsed time: 00:00:11
++ echo [Coverity] Scan completed successfully!!
+[Coverity] Scan completed successfully!!
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // container
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Black Duck Scan)
+[Pipeline] container
+[Pipeline] {
+[Pipeline] withCredentials
+Masking supported pattern matches of $BD_TOKEN
+[Pipeline] {
+[Pipeline] sh
+Warning: A secret was passed to "sh" using Groovy String interpolation, which is insecure.
+		 Affected argument(s) used the following variable(s): [BD_TOKEN]
+		 See https://jenkins.io/redirect/groovy-string-interpolation for details.
++ echo [Black Duck] Starting scan...
+[Black Duck] Starting scan...
++ java -jar /home/jenkins/detect.jar --blackduck.api.token=**** --blackduck.url=https://blackduck.ad.aramcodigital.com --detect.project.group.name=adc-solutions --detect.project.name=adc-website-frontend --detect.project.version.name=staging-latest --detect.detector.search.depth=10 --detect.project.version.update=true
+2026-04-30 10:43:50 UTC INFO  [main] --- Detect-Self-Updater:  Checking https://blackduck.ad.aramcodigital.com/api/tools/detect API for centrally managed Detect version to download to /home/jenkins/tmp.
+2026-04-30 10:43:51 UTC INFO  [main] --- Detect-Self-Updater:  Present Detect installation is up to date - skipping download.
+______     _            _
+|  _  \   | |          | |
+| | | |___| |_ ___  ___| |_
+| | | / _ \ __/ _ \/ __| __|
+| |/ /  __/ ||  __/ (__| |_
+|___/ \___|\__\___|\___|\__|
+
+
+Detect Version: 11.0.0
+
+2026-04-30 10:43:52 UTC INFO  [main] --- 
+2026-04-30 10:43:52 UTC INFO  [main] --- Current property values:
+2026-04-30 10:43:52 UTC INFO  [main] --- --property = value [notes]
+2026-04-30 10:43:52 UTC INFO  [main] --- ------------------------------------------------------------
+2026-04-30 10:43:52 UTC INFO  [main] --- blackduck.api.token = **************************************************************************************************** [cmd] 
+2026-04-30 10:43:52 UTC INFO  [main] --- blackduck.url = https://blackduck.ad.aramcodigital.com [cmd] 
+2026-04-30 10:43:52 UTC INFO  [main] --- detect.detector.search.depth = 10 [cmd] 
+2026-04-30 10:43:52 UTC INFO  [main] --- detect.project.group.name = adc-solutions [cmd] 
+2026-04-30 10:43:52 UTC INFO  [main] --- detect.project.name = adc-website-frontend [cmd] 
+2026-04-30 10:43:52 UTC INFO  [main] --- detect.project.version.name = staging-latest [cmd] 
+2026-04-30 10:43:52 UTC INFO  [main] --- detect.project.version.update = true [cmd] 
+2026-04-30 10:43:52 UTC INFO  [main] --- ------------------------------------------------------------
+2026-04-30 10:43:52 UTC INFO  [main] --- 
+2026-04-30 10:43:52 UTC INFO  [main] --- Detect build date: 2025-10-30
+2026-04-30 10:43:52 UTC INFO  [main] --- Source directory: /home/jenkins/agent/workspace/opment_aramco-digital-react_main
+2026-04-30 10:43:52 UTC INFO  [main] --- Output directory: /home/jenkins/blackduck
+2026-04-30 10:43:52 UTC INFO  [main] --- Run directory: /home/jenkins/blackduck/runs/2026-04-30-10-43-52-112
+2026-04-30 10:43:52 UTC INFO  [main] --- 
+2026-04-30 10:43:54 UTC INFO  [main] --- Successfully connected to Black Duck SCA (version 2025.4.2)!
+2026-04-30 10:43:54 UTC INFO  [main] --- ----------------------------------
+2026-04-30 10:43:54 UTC INFO  [main] --- Will include the Docker tool.
+2026-04-30 10:43:54 UTC INFO  [main] --- Docker actions finished.
+2026-04-30 10:43:54 UTC INFO  [main] --- ----------------------------------
+2026-04-30 10:43:54 UTC INFO  [main] --- Will include the Bazel tool.
+2026-04-30 10:43:54 UTC INFO  [main] --- Bazel actions finished.
+2026-04-30 10:43:54 UTC INFO  [main] --- ----------------------------------
+2026-04-30 10:43:54 UTC INFO  [main] --- Will include the Detectors tool.
+2026-04-30 10:43:54 UTC INFO  [main] --- Searching for detectors.
+2026-04-30 10:43:54 UTC INFO  [main] --- Evaluating detectors. This may take a while.
+2026-04-30 10:43:55 UTC INFO  [main] --- Running executable >/usr/bin/git config --get remote.origin.url
+2026-04-30 10:43:55 UTC INFO  [main] --- Process return code: 0
+2026-04-30 10:43:55 UTC INFO  [main] --- Running executable >/usr/bin/git rev-parse --abbrev-ref HEAD
+2026-04-30 10:43:55 UTC INFO  [main] --- Process return code: 0
+2026-04-30 10:43:55 UTC INFO  [main] --- HEAD is detached for this repo, using heuristics to find Git branch.
+2026-04-30 10:43:55 UTC INFO  [main] --- Running executable >/usr/bin/git log -n 1 --pretty=%d HEAD
+2026-04-30 10:43:55 UTC INFO  [main] --- Process return code: 0
+2026-04-30 10:43:55 UTC INFO  [main] --- Running executable >/usr/bin/git rev-parse HEAD
+2026-04-30 10:43:55 UTC INFO  [main] --- Process return code: 0
+2026-04-30 10:43:56 UTC INFO  [main] --- ======================================================================================================
+2026-04-30 10:43:56 UTC INFO  [main] --- Detector Report
+2026-04-30 10:43:56 UTC INFO  [main] --- ======================================================================================================
+2026-04-30 10:43:56 UTC INFO  [main] --- 	/home/jenkins/agent/workspace/opment_aramco-digital-react_main (depth 0)
+2026-04-30 10:43:56 UTC INFO  [main] --- 		NPM Package Lock: SUCCESS
+2026-04-30 10:43:56 UTC INFO  [main] --- 			Found file: /home/jenkins/agent/workspace/opment_aramco-digital-react_main/package-lock.json
+2026-04-30 10:43:56 UTC INFO  [main] --- 			Found file: /home/jenkins/agent/workspace/opment_aramco-digital-react_main/package.json
+2026-04-30 10:43:56 UTC INFO  [main] --- 		Git: SUCCESS
+2026-04-30 10:43:56 UTC INFO  [main] --- 			Found file: /home/jenkins/agent/workspace/opment_aramco-digital-react_main/.git
+2026-04-30 10:43:56 UTC INFO  [main] --- 			Found executable: /usr/bin/git
+2026-04-30 10:43:56 UTC INFO  [main] --- ----------------------------------
+2026-04-30 10:43:56 UTC INFO  [main] --- The following project names were found: 
+2026-04-30 10:43:56 UTC INFO  [main] --- 	NPM: frontend, 0.1.0
+2026-04-30 10:43:56 UTC INFO  [main] --- Chose to use NPM at depth 0 for project name and version. Override with detect.project.detector.
+2026-04-30 10:43:56 UTC INFO  [main] --- Detectors actions finished.
+2026-04-30 10:43:56 UTC INFO  [main] --- ----------------------------------
+2026-04-30 10:43:56 UTC INFO  [main] --- Project name: adc-website-frontend
+2026-04-30 10:43:56 UTC INFO  [main] --- Project version: staging-latest
+2026-04-30 10:43:56 UTC INFO  [main] --- Will look for project group named: adc-solutions
+2026-04-30 10:43:56 UTC INFO  [main] --- The adc-website-frontend project was found and performUpdate=true, so it will be updated.
+2026-04-30 10:43:57 UTC INFO  [main] --- The staging-latest version was found and performUpdate=true, so the version will be updated.
+2026-04-30 10:43:58 UTC INFO  [main] --- Starting the codelocation file uploads.
+2026-04-30 10:43:59 UTC INFO  [pool-1-thread-1] --- Try #1 for task bdio upload (elapsed: 00:00:00.000)...complete!
+2026-04-30 10:43:59 UTC INFO  [main] --- Completed the codelocation file uploads.
+2026-04-30 10:43:59 UTC INFO  [main] --- ----------------------------------
+2026-04-30 10:43:59 UTC INFO  [main] --- Will include the Signature Scanner tool.
+2026-04-30 10:43:59 UTC INFO  [main] --- No metadata file exists, assuming this is new installation and the signature scanner should be downloaded.
+2026-04-30 10:44:00 UTC INFO  [main] --- Downloading the Black Duck Signature Scanner.
+2026-04-30 10:44:00 UTC INFO  [main] --- If the Signature Scanner on your Black Duck server has changed, the contents of /home/jenkins/blackduck/tools/Black_Duck_Scan_Installation may change which could involve deleting files - please do not place items in the expansion directory as this directory is assumed to be under blackduck-common control.
+2026-04-30 10:44:02 UTC INFO  [main] --- Black Duck Signature Scanner downloaded successfully.
+2026-04-30 10:44:02 UTC INFO  [main] --- The Black Duck Signature Scanner downloaded/found successfully: /home/jenkins/blackduck/tools
+2026-04-30 10:44:02 UTC INFO  [main] --- No scan targets provided - registering the source path /home/jenkins/agent/workspace/opment_aramco-digital-react_main to scan
+2026-04-30 10:44:02 UTC INFO  [main] --- Starting the Black Duck Signature Scan commands.
+2026-04-30 10:44:02 UTC INFO  [pool-3-thread-1] --- Black Duck CLI command: /home/jenkins/blackduck/tools/Black_Duck_Scan_Installation/scan.cli-0.1.4/jre/bin/java -Done-jar.silent=true -Done-jar.jar.path=/home/jenkins/blackduck/tools/Black_Duck_Scan_Installation/scan.cli-0.1.4/lib/cache/scan.cli.impl-standalone.jar -Xmx4096m -jar /home/jenkins/blackduck/tools/Black_Duck_Scan_Installation/scan.cli-0.1.4/lib/scan.cli-0.1.4-standalone.jar --no-prompt --scheme https --host blackduck.ad.aramcodigital.com --port 443 -v --logDir /home/jenkins/blackduck/runs/2026-04-30-10-43-52-112/scan/BlackDuckScanOutput/2026-04-30_10-44-02-972_1 --statusWriteDir /home/jenkins/blackduck/runs/2026-04-30-10-43-52-112/scan/BlackDuckScanOutput/2026-04-30_10-44-02-972_1 --project adc-website-frontend --release staging-latest --name opment_aramco-digital-react_main/adc-website-frontend/staging-latest signature --exclude /.git/ /home/jenkins/agent/workspace/opment_aramco-digital-react_main
+2026-04-30 10:44:11 UTC INFO  [pool-3-thread-1] --- 
+2026-04-30 10:44:11 UTC INFO  [pool-3-thread-1] --- Black Duck Signature Scanner return code: 0
+2026-04-30 10:44:11 UTC INFO  [pool-3-thread-1] --- Signature Scanner log output directory: '/home/jenkins/blackduck/runs/2026-04-30-10-43-52-112/scan/BlackDuckScanOutput/2026-04-30_10-44-02-972_1'
+2026-04-30 10:44:11 UTC INFO  [main] --- Completed the Black Duck Signature Scan commands.
+2026-04-30 10:44:11 UTC INFO  [main] --- Signature Scanner actions finished.
+2026-04-30 10:44:11 UTC INFO  [main] --- ----------------------------------
+2026-04-30 10:44:11 UTC INFO  [main] --- Will include the Binary Scanner tool.
+2026-04-30 10:44:11 UTC INFO  [main] --- Binary scanner found nothing to upload.
+2026-04-30 10:44:11 UTC INFO  [main] --- Binary Scanner actions finished.
+2026-04-30 10:44:11 UTC INFO  [main] --- ----------------------------------
+2026-04-30 10:44:11 UTC INFO  [main] --- Will include the Container Scanner tool.
+2026-04-30 10:44:11 UTC INFO  [main] --- No detect.container.scan.file.path property was provided. Skipping container scan.
+2026-04-30 10:44:11 UTC INFO  [main] --- Container Scanner actions finished.
+2026-04-30 10:44:11 UTC INFO  [main] --- ----------------------------------
+2026-04-30 10:44:11 UTC INFO  [main] --- Vulnerability Impact Analysis tool will not be run.
+2026-04-30 10:44:11 UTC INFO  [main] --- ----------------------------------
+2026-04-30 10:44:11 UTC INFO  [main] --- IaC Scanner tool will not be run.
+2026-04-30 10:44:11 UTC INFO  [main] --- ----------------------------------
+2026-04-30 10:44:11 UTC INFO  [main] --- Checking to see if Detect should check policy for violations.
+2026-04-30 10:44:11 UTC INFO  [main] --- 
+2026-04-30 10:44:11 UTC INFO  [main] --- 
+2026-04-30 10:44:11 UTC INFO  [main] --- Creating status file: /home/jenkins/blackduck/runs/2026-04-30-10-43-52-112/status/status.json
+2026-04-30 10:44:11 UTC INFO  [main] --- 
+2026-04-30 10:44:11 UTC INFO  [main] --- Status file has been deleted.  To preserve status file, turn off cleanup actions.
+2026-04-30 10:44:11 UTC INFO  [main] --- Cleaning up directory: /home/jenkins/blackduck/runs/2026-04-30-10-43-52-112
+2026-04-30 10:44:12 UTC INFO  [main] --- 
+2026-04-30 10:44:12 UTC INFO  [main] --- 
+2026-04-30 10:44:12 UTC INFO  [main] --- ======== Detect Result ========
+2026-04-30 10:44:12 UTC INFO  [main] --- 
+2026-04-30 10:44:12 UTC INFO  [main] --- Black Duck SCA Project BOM: https://blackduck.ad.aramcodigital.com/api/projects/a418260d-26a0-45eb-b241-36c7b3dad88a/versions/bf02f2d3-4ada-426f-8473-48b8b013518f/components
+2026-04-30 10:44:12 UTC INFO  [main] --- 
+2026-04-30 10:44:12 UTC INFO  [main] --- ======== Detect Status ========
+2026-04-30 10:44:12 UTC INFO  [main] --- 
+2026-04-30 10:44:12 UTC INFO  [main] --- GIT: SUCCESS
+2026-04-30 10:44:12 UTC INFO  [main] --- NPM: SUCCESS
+2026-04-30 10:44:12 UTC INFO  [main] --- 
+2026-04-30 10:44:12 UTC INFO  [main] --- Signature scan / Snippet scan on /home/jenkins/agent/workspace/opment_aramco-digital-react_main: SUCCESS
+2026-04-30 10:44:12 UTC INFO  [main] --- Overall Status: SUCCESS - Detect exited successfully.
+2026-04-30 10:44:12 UTC INFO  [main] --- 
+2026-04-30 10:44:12 UTC INFO  [main] --- ===============================
+2026-04-30 10:44:12 UTC INFO  [main] --- 
+2026-04-30 10:44:12 UTC INFO  [main] --- Detect duration: 00h 00m 22s 376ms
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // container
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build & Push Image)
+[Pipeline] container
+[Pipeline] {
+[Pipeline] sh
 + echo '[Kaniko] Building & pushing Docker image...'
 [Kaniko] Building & pushing Docker image...
 + /kaniko/executor --context /home/jenkins/agent/workspace/opment_aramco-digital-react_main --dockerfile /home/jenkins/agent/workspace/opment_aramco-digital-react_main/Dockerfile '--destination=me-central2-docker.pkg.dev/prj-adc-gcp-dv-adc-website/adc-gcp-dv-website-repo/aramco-frontend:staging-latest' '--verbosity=info'
-INFO[0000] Resolved base name node:20-alpine@sha256:fb4cd12c85ee03686f6af5362a0b0d56d50c58a04632e6c0fb8363f609372293 to deps 
-INFO[0000] Resolved base name node:20-alpine@sha256:fb4cd12c85ee03686f6af5362a0b0d56d50c58a04632e6c0fb8363f609372293 to builder 
-INFO[0000] Resolved base name node:20-alpine@sha256:fb4cd12c85ee03686f6af5362a0b0d56d50c58a04632e6c0fb8363f609372293 to runner 
-INFO[0000] Using dockerignore file: /home/jenkins/agent/workspace/opment_aramco-digital-react_main/.dockerignore 
-INFO[0000] Retrieving image manifest node:20-alpine@sha256:fb4cd12c85ee03686f6af5362a0b0d56d50c58a04632e6c0fb8363f609372293 
-INFO[0000] Retrieving image node:20-alpine@sha256:fb4cd12c85ee03686f6af5362a0b0d56d50c58a04632e6c0fb8363f609372293 from registry index.docker.io 
-INFO[0002] Retrieving image manifest node:20-alpine@sha256:fb4cd12c85ee03686f6af5362a0b0d56d50c58a04632e6c0fb8363f609372293 
-INFO[0002] Returning cached image manifest              
-INFO[0002] Retrieving image manifest node:20-alpine@sha256:fb4cd12c85ee03686f6af5362a0b0d56d50c58a04632e6c0fb8363f609372293 
-INFO[0002] Returning cached image manifest              
-INFO[0002] Built cross stage deps: map[0:[/app/node_modules] 1:[/app/public /app/.next/standalone /app/.next/static]] 
-INFO[0002] Retrieving image manifest node:20-alpine@sha256:fb4cd12c85ee03686f6af5362a0b0d56d50c58a04632e6c0fb8363f609372293 
-INFO[0002] Returning cached image manifest              
-INFO[0002] Executing 0 build triggers                   
-INFO[0002] Building stage 'node:20-alpine@sha256:fb4cd12c85ee03686f6af5362a0b0d56d50c58a04632e6c0fb8363f609372293' [idx: '0', base-idx: '-1'] 
-INFO[0002] Unpacking rootfs as cmd RUN apk update && apk upgrade --no-cache && apk add --no-cache libc6-compat requires it. 
-INFO[0006] RUN apk update && apk upgrade --no-cache && apk add --no-cache libc6-compat 
-INFO[0006] Initializing snapshotter ...                 
-INFO[0006] Taking snapshot of full filesystem...        
-INFO[0006] Cmd: /bin/sh                                 
-INFO[0006] Args: [-c apk update && apk upgrade --no-cache && apk add --no-cache libc6-compat] 
-INFO[0006] Running: [/bin/sh -c apk update && apk upgrade --no-cache && apk add --no-cache libc6-compat] 
-v3.23.4-102-gda34fba0372 [https://dl-cdn.alpinelinux.org/alpine/v3.23/main]
-v3.23.4-101-ga586ccaeaf8 [https://dl-cdn.alpinelinux.org/alpine/v3.23/community]
+[36mINFO[0m[0000] Resolved base name node:20-alpine@sha256:fb4cd12c85ee03686f6af5362a0b0d56d50c58a04632e6c0fb8363f609372293 to deps 
+[36mINFO[0m[0000] Resolved base name node:20-alpine@sha256:fb4cd12c85ee03686f6af5362a0b0d56d50c58a04632e6c0fb8363f609372293 to builder 
+[36mINFO[0m[0000] Resolved base name node:20-alpine@sha256:fb4cd12c85ee03686f6af5362a0b0d56d50c58a04632e6c0fb8363f609372293 to runner 
+[36mINFO[0m[0000] Using dockerignore file: /home/jenkins/agent/workspace/opment_aramco-digital-react_main/.dockerignore 
+[36mINFO[0m[0000] Retrieving image manifest node:20-alpine@sha256:fb4cd12c85ee03686f6af5362a0b0d56d50c58a04632e6c0fb8363f609372293 
+[36mINFO[0m[0000] Retrieving image node:20-alpine@sha256:fb4cd12c85ee03686f6af5362a0b0d56d50c58a04632e6c0fb8363f609372293 from registry index.docker.io 
+[36mINFO[0m[0002] Retrieving image manifest node:20-alpine@sha256:fb4cd12c85ee03686f6af5362a0b0d56d50c58a04632e6c0fb8363f609372293 
+[36mINFO[0m[0002] Returning cached image manifest              
+[36mINFO[0m[0002] Retrieving image manifest node:20-alpine@sha256:fb4cd12c85ee03686f6af5362a0b0d56d50c58a04632e6c0fb8363f609372293 
+[36mINFO[0m[0002] Returning cached image manifest              
+[36mINFO[0m[0002] Built cross stage deps: map[0:[/app/node_modules] 1:[/app/public /app/.next/standalone /app/.next/static]] 
+[36mINFO[0m[0002] Retrieving image manifest node:20-alpine@sha256:fb4cd12c85ee03686f6af5362a0b0d56d50c58a04632e6c0fb8363f609372293 
+[36mINFO[0m[0002] Returning cached image manifest              
+[36mINFO[0m[0002] Executing 0 build triggers                   
+[36mINFO[0m[0002] Building stage 'node:20-alpine@sha256:fb4cd12c85ee03686f6af5362a0b0d56d50c58a04632e6c0fb8363f609372293' [idx: '0', base-idx: '-1'] 
+[36mINFO[0m[0002] Unpacking rootfs as cmd RUN apk update && apk upgrade --no-cache && apk add --no-cache libc6-compat requires it. 
+[36mINFO[0m[0006] RUN apk update && apk upgrade --no-cache && apk add --no-cache libc6-compat 
+[36mINFO[0m[0006] Initializing snapshotter ...                 
+[36mINFO[0m[0006] Taking snapshot of full filesystem...        
+[36mINFO[0m[0007] Cmd: /bin/sh                                 
+[36mINFO[0m[0007] Args: [-c apk update && apk upgrade --no-cache && apk add --no-cache libc6-compat] 
+[36mINFO[0m[0007] Running: [/bin/sh -c apk update && apk upgrade --no-cache && apk add --no-cache libc6-compat] 
+v3.23.4-108-gc5ce2513ba2 [https://dl-cdn.alpinelinux.org/alpine/v3.23/main]
+v3.23.4-111-g6d99efc468f [https://dl-cdn.alpinelinux.org/alpine/v3.23/community]
 OK: 27578 distinct packages available
 OK: 10.9 MiB in 18 packages
 (1/3) Installing musl-obstack (1.2.3-r2)
 (2/3) Installing libucontext (1.3.3-r0)
 (3/3) Installing gcompat (1.1.0-r4)
 OK: 11.0 MiB in 21 packages
-INFO[0010] Taking snapshot of full filesystem...        
-INFO[0011] WORKDIR /app                                 
-INFO[0011] Cmd: workdir                                 
-INFO[0011] Changed working directory to /app            
-INFO[0011] Creating directory /app with uid -1 and gid -1 
-INFO[0011] Taking snapshot of files...                  
-INFO[0011] Resolving srcs [package.json package-lock.json*]... 
-INFO[0011] COPY package.json package-lock.json* ./      
-INFO[0011] Resolving srcs [package.json package-lock.json*]... 
-INFO[0011] Taking snapshot of files...                  
-INFO[0011] RUN npm ci                                   
-INFO[0011] Cmd: /bin/sh                                 
-INFO[0011] Args: [-c npm ci]                            
-INFO[0011] Running: [/bin/sh -c npm ci]                 
-added 431 packages, and audited 432 packages in 21s
-165 packages are looking for funding
+[36mINFO[0m[0012] Taking snapshot of full filesystem...        
+[36mINFO[0m[0012] WORKDIR /app                                 
+[36mINFO[0m[0012] Cmd: workdir                                 
+[36mINFO[0m[0012] Changed working directory to /app            
+[36mINFO[0m[0012] Creating directory /app with uid -1 and gid -1 
+[36mINFO[0m[0012] Taking snapshot of files...                  
+[36mINFO[0m[0012] Resolving srcs [package.json package-lock.json*]... 
+[36mINFO[0m[0012] COPY package.json package-lock.json* ./      
+[36mINFO[0m[0012] Resolving srcs [package.json package-lock.json*]... 
+[36mINFO[0m[0012] Taking snapshot of files...                  
+[36mINFO[0m[0012] RUN npm ci                                   
+[36mINFO[0m[0012] Cmd: /bin/sh                                 
+[36mINFO[0m[0012] Args: [-c npm ci]                            
+[36mINFO[0m[0012] Running: [/bin/sh -c npm ci]                 
+
+added 407 packages, and audited 408 packages in 22s
+
+164 packages are looking for funding
   run `npm fund` for details
+
 3 moderate severity vulnerabilities
+
 To address all issues (including breaking changes), run:
   npm audit fix --force
+
 Run `npm audit` for details.
 npm notice
 npm notice New major version of npm available! 10.8.2 -> 11.13.0
 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.13.0
 npm notice To update run: npm install -g npm@11.13.0
 npm notice
-INFO[0032] Taking snapshot of full filesystem...        
-INFO[0061] Saving file app/node_modules for later use   
-INFO[0072] Deleting filesystem...                       
-INFO[0074] Retrieving image manifest node:20-alpine@sha256:fb4cd12c85ee03686f6af5362a0b0d56d50c58a04632e6c0fb8363f609372293 
-INFO[0074] Returning cached image manifest              
-INFO[0074] Executing 0 build triggers                   
-INFO[0074] Building stage 'node:20-alpine@sha256:fb4cd12c85ee03686f6af5362a0b0d56d50c58a04632e6c0fb8363f609372293' [idx: '1', base-idx: '-1'] 
-INFO[0074] Unpacking rootfs as cmd RUN apk update && apk upgrade --no-cache requires it. 
-INFO[0078] RUN apk update && apk upgrade --no-cache     
-INFO[0078] Initializing snapshotter ...                 
-INFO[0078] Taking snapshot of full filesystem...        
-INFO[0086] Cmd: /bin/sh                                 
-INFO[0086] Args: [-c apk update && apk upgrade --no-cache] 
-INFO[0086] Running: [/bin/sh -c apk update && apk upgrade --no-cache] 
-v3.23.4-102-gda34fba0372 [https://dl-cdn.alpinelinux.org/alpine/v3.23/main]
-v3.23.4-101-ga586ccaeaf8 [https://dl-cdn.alpinelinux.org/alpine/v3.23/community]
+[36mINFO[0m[0034] Taking snapshot of full filesystem...        
+[36mINFO[0m[0064] Saving file app/node_modules for later use   
+[36mINFO[0m[0074] Deleting filesystem...                       
+[36mINFO[0m[0076] Retrieving image manifest node:20-alpine@sha256:fb4cd12c85ee03686f6af5362a0b0d56d50c58a04632e6c0fb8363f609372293 
+[36mINFO[0m[0076] Returning cached image manifest              
+[36mINFO[0m[0076] Executing 0 build triggers                   
+[36mINFO[0m[0076] Building stage 'node:20-alpine@sha256:fb4cd12c85ee03686f6af5362a0b0d56d50c58a04632e6c0fb8363f609372293' [idx: '1', base-idx: '-1'] 
+[36mINFO[0m[0076] Unpacking rootfs as cmd RUN apk update && apk upgrade --no-cache requires it. 
+[36mINFO[0m[0081] RUN apk update && apk upgrade --no-cache     
+[36mINFO[0m[0081] Initializing snapshotter ...                 
+[36mINFO[0m[0081] Taking snapshot of full filesystem...        
+[36mINFO[0m[0088] Cmd: /bin/sh                                 
+[36mINFO[0m[0088] Args: [-c apk update && apk upgrade --no-cache] 
+[36mINFO[0m[0088] Running: [/bin/sh -c apk update && apk upgrade --no-cache] 
+v3.23.4-108-gc5ce2513ba2 [https://dl-cdn.alpinelinux.org/alpine/v3.23/main]
+v3.23.4-111-g6d99efc468f [https://dl-cdn.alpinelinux.org/alpine/v3.23/community]
 OK: 27578 distinct packages available
 OK: 10.9 MiB in 18 packages
-INFO[0089] Taking snapshot of full filesystem...        
-INFO[0089] WORKDIR /app                                 
-INFO[0089] Cmd: workdir                                 
-INFO[0089] Changed working directory to /app            
-INFO[0089] Creating directory /app with uid -1 and gid -1 
-INFO[0089] Taking snapshot of files...                  
-INFO[0089] COPY --from=deps /app/node_modules ./node_modules 
-INFO[0097] Taking snapshot of files...                  
-INFO[0111] COPY . .                                     
-INFO[0114] Taking snapshot of files...                  
-INFO[0128] ARG NEXT_PUBLIC_STRAPI_URL                   
-INFO[0128] ARG NEXT_PUBLIC_SITE_URL=https://aramcodigital.com 
-INFO[0128] ARG STRAPI_API_TOKEN                         
-INFO[0128] ENV NEXT_PUBLIC_STRAPI_URL=$NEXT_PUBLIC_STRAPI_URL 
-INFO[0128] ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL 
-INFO[0128] ENV STRAPI_API_TOKEN=$STRAPI_API_TOKEN       
-INFO[0128] ENV NEXT_TELEMETRY_DISABLED=1                
-INFO[0128] ENV NODE_ENV=production                      
-INFO[0128] RUN npm run build                            
-INFO[0128] Cmd: /bin/sh                                 
-INFO[0128] Args: [-c npm run build]                     
-INFO[0128] Running: [/bin/sh -c npm run build]          
+[36mINFO[0m[0091] Taking snapshot of full filesystem...        
+[36mINFO[0m[0092] WORKDIR /app                                 
+[36mINFO[0m[0092] Cmd: workdir                                 
+[36mINFO[0m[0092] Changed working directory to /app            
+[36mINFO[0m[0092] Creating directory /app with uid -1 and gid -1 
+[36mINFO[0m[0092] Taking snapshot of files...                  
+[36mINFO[0m[0092] COPY --from=deps /app/node_modules ./node_modules 
+[36mINFO[0m[0129] Taking snapshot of files...                  
+[36mINFO[0m[0150] COPY . .                                     
+[36mINFO[0m[0153] Taking snapshot of files...                  
+[36mINFO[0m[0165] ARG NEXT_PUBLIC_STRAPI_URL                   
+[36mINFO[0m[0165] ARG NEXT_PUBLIC_SITE_URL=https://aramcodigital.com 
+[36mINFO[0m[0165] ARG STRAPI_API_TOKEN                         
+[36mINFO[0m[0165] ENV NEXT_PUBLIC_STRAPI_URL=$NEXT_PUBLIC_STRAPI_URL 
+[36mINFO[0m[0165] ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL 
+[36mINFO[0m[0165] ENV STRAPI_API_TOKEN=$STRAPI_API_TOKEN       
+[36mINFO[0m[0165] ENV NEXT_TELEMETRY_DISABLED=1                
+[36mINFO[0m[0165] ENV NODE_ENV=production                      
+[36mINFO[0m[0165] RUN npm run build                            
+[36mINFO[0m[0165] Cmd: /bin/sh                                 
+[36mINFO[0m[0165] Args: [-c npm run build]                     
+[36mINFO[0m[0165] Running: [/bin/sh -c npm run build]          
+
 > frontend@0.1.0 build
 > npx next build
+
 ▲ Next.js 16.2.3 (Turbopack)
+
 ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
   Creating an optimized production build ...
-✓ Compiled successfully in 15.9s
+✓ Compiled successfully in 14.3s
   Running TypeScript ...
+
 Failed to type check.
+
 ./src/components/sections/StrategicRoleSection.tsx:28:52
 Type error: Property 'strategicRole' does not exist on type '{ readonly hero: { readonly title: { readonly en: "Shaping Tomorrow Together"; readonly ar: "نصنع المستقبل معاً"; }; readonly tagline: { readonly en: "Bringing the best in people, technology and products to help businesses achieve more, creating new opportunities for growth in the region & beyond."; readonly ar: "نج...'.
-  26 |   const { locale, isRTL } = useLocale()
-  27 |   const isArabic = locale === 'ar'
-&gt; 28 |   const sectionTranslations = translations.aboutUs.strategicRole
-     |                                                    ^
-  29 |   const resolvedImageAlt = imageAlt ?? sectionTranslations.imageAlt[locale]
-  30 |
-  31 |   const fontStyle: React.CSSProperties = isArabic
+
+  [90m26 |[0m   [36mconst[0m { locale, isRTL } = useLocale()
+  [90m27 |[0m   [36mconst[0m isArabic = locale === [32m'ar'[0m
+[31m[1m>[0m [90m28 |[0m   [36mconst[0m sectionTranslations = translations.aboutUs.strategicRole
+  [90m   |[0m                                                    [31m[1m^[0m
+  [90m29 |[0m   [36mconst[0m resolvedImageAlt = imageAlt ?? sectionTranslations.imageAlt[locale]
+  [90m30 |[0m
+  [90m31 |[0m   [36mconst[0m fontStyle: [33mReact[0m.[33mCSSProperties[0m = isArabic
+
 Next.js build worker exited with code: 1 and signal: null
 npm notice
 npm notice New major version of npm available! 10.8.2 -> 11.13.0
@@ -121,6 +677,27 @@ npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.13.0
 npm notice To update run: npm install -g npm@11.13.0
 npm notice
 error building image: error building stage: failed to execute command: waiting for process to exit: exit status 1
-script returned exit code 1
+[Pipeline] }
+[Pipeline] // container
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy to Cloud Run)
+Stage "Deploy to Cloud Run" skipped due to earlier failure(s)
+[Pipeline] getContext
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] }
+[Pipeline] // podTemplate
+[Pipeline] End of Pipeline
+ERROR: script returned exit code 1
+[GitLab Pipeline Status] Notifying branch build status: FAILED adc-solutions-development/build/adc-solutions-development/adc-solutions-development%2Faramco-digital-react/main #5: There was a failure building this commit.
 
-
+[GitLab Pipeline Status] Notified
+Finished: FAILURE
