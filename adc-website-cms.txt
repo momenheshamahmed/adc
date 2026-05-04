@@ -251,3 +251,7 @@ ERROR: script returned exit code 127
 [GitLab Pipeline Status] Notified
 
 Finished: FAILURE
+
+Stage Logs (Deploy to Cloud Run)
+ Shell Script (self time 659ms)
+/home/jenkins/agent/workspace/elopment_aramco-digital-cms_main@tmp/durable-7bee8d76/script.sh.copy: 2: OCI_S3_BASE_URL: ERROR: Set OCI_S3_BASE_URL in Jenkins (folder/job env or credentials). Do not put PAR tokens in the Jenkinsfile.
