@@ -1,0 +1,253 @@
+Started by user Momen.Osman
+
+Querying the current revision of branch main...
+Current revision of branch main is 705698e8f419e037b8f095af655d6ae6a5e8d59f
+Obtained Jenkinsfile from 705698e8f419e037b8f095af655d6ae6a5e8d59f
+Loading library my-shared-library@main
+Attempting to resolve main from remote references...
+ > git --version # timeout=10
+ > git --version # 'git version 2.39.5'
+using GIT_ASKPASS to set credentials GITLAB_CRED (Created By Madhu)
+ > git ls-remote -h -- https://gitlab-dev.ad.aramcodigital.com/adc-lab/my-shared-library.git # timeout=10
+Found match: refs/heads/main revision fd8385d214dc5c9b381cf2d75edb804375c8ae1a
+The recommended git tool is: NONE
+using credential GITLAB_CRED
+ > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/elopment_aramco-digital-cms_main@libs/a9d84ac3ceb2ec9a9518129b8c5e1b6e572325ea1fccf335ed777cc7d9d4446f/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://gitlab-dev.ad.aramcodigital.com/adc-lab/my-shared-library.git # timeout=10
+Fetching without tags
+Fetching upstream changes from https://gitlab-dev.ad.aramcodigital.com/adc-lab/my-shared-library.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.39.5'
+using GIT_ASKPASS to set credentials GITLAB_CRED (Created By Madhu)
+ > git fetch --no-tags --force --progress -- https://gitlab-dev.ad.aramcodigital.com/adc-lab/my-shared-library.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+Checking out Revision fd8385d214dc5c9b381cf2d75edb804375c8ae1a (main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f fd8385d214dc5c9b381cf2d75edb804375c8ae1a # timeout=10
+Commit message: "Update file blackduckScanPython.groovy"
+ > git rev-list --no-walk fd8385d214dc5c9b381cf2d75edb804375c8ae1a # timeout=10
+[GitLab Pipeline Status] Notifying branch build status: RUNNING adc-solutions-development/build/adc-solutions-development/adc-solutions-development%2Faramco-digital-cms/main #10: Build started...
+[Pipeline] Start of Pipeline
+[Pipeline] echo
+[WARNING] label option is deprecated. To use a static pod template, use the 'inheritFrom' option.
+[Pipeline] podTemplate
+[Pipeline] {
+[Pipeline] node
+Agent jenkins-agent-webapp-tt46c
+ is provisioned from template jenkins-agent-webapp
+---
+apiVersion: "v1"
+kind: "Pod"
+metadata:
+  annotations:
+    kubernetes.jenkins.io/last-refresh: "1777874658596"
+  labels:
+    jenkins: "slave"
+    jenkins/label-digest: "c19fbc4453125b49ad1bbd353ca13257c0153ceb"
+    jenkins/label: "jenkins-agent-webapp"
+    kubernetes.jenkins.io/controller: "http___jenkins_jenkins-dev_svc_cluster_local_8080x"
+  name: "jenkins-agent-webapp-tt46c"
+  namespace: "jenkins-dev"
+spec:
+  containers:
+  - args:
+    - "9999999"
+    command:
+    - "sleep"
+    image: "me-central2-docker.pkg.dev/prj-adc-gcp-devsecops/adc-jenkins-agents-img/kaniko-executor:v1.24.0-debug"
+    imagePullPolicy: "IfNotPresent"
+    name: "kaniko"
+    resources: {}
+    tty: false
+    volumeMounts:
+    - mountPath: "/home/jenkins/agent"
+      name: "workspace-volume"
+      readOnly: false
+    workingDir: "/home/jenkins/agent"
+  - args:
+    - "9999999"
+    command:
+    - "sleep"
+    image: "me-central2-docker.pkg.dev/prj-adc-gcp-devsecops/adc-jenkins-agents-img/blackduck-img:11.0.0"
+    imagePullPolicy: "IfNotPresent"
+    name: "blackduck-agent"
+    resources: {}
+    tty: false
+    volumeMounts:
+    - mountPath: "/home/jenkins/agent"
+      name: "workspace-volume"
+      readOnly: false
+    workingDir: "/home/jenkins/agent"
+  - command:
+    - "/jenkins-agent/jenkins-agent"
+    env:
+    - name: "JENKINS_SECRET"
+      value: "********"
+    - name: "JENKINS_TUNNEL"
+      value: "jenkins-agent.jenkins-dev.svc.cluster.local:50000"
+    - name: "JENKINS_AGENT_NAME"
+      value: "jenkins-agent-webapp-tt46c"
+    - name: "JENKINS_AGENT_FILE"
+      value: "/jenkins-agent/agent.jar"
+    - name: "REMOTING_OPTS"
+      value: "-noReconnectAfter 1d"
+    - name: "JENKINS_NAME"
+      value: "jenkins-agent-webapp-tt46c"
+    - name: "JENKINS_AGENT_WORKDIR"
+      value: "/home/jenkins/agent"
+    - name: "JENKINS_URL"
+      value: "http://jenkins.jenkins-dev.svc.cluster.local:8080/"
+    image: "me-central2-docker.pkg.dev/prj-adc-gcp-devsecops/adc-jenkins-custom-img/jenkins/inbound-agent:v6"
+    imagePullPolicy: "IfNotPresent"
+    name: "jnlp"
+    resources: {}
+    tty: false
+    volumeMounts:
+    - mountPath: "/home/jenkins/agent"
+      name: "workspace-volume"
+      readOnly: false
+    - mountPath: "/jenkins-agent"
+      name: "jenkins-agent"
+      readOnly: true
+    workingDir: "/home/jenkins/agent"
+  - args:
+    - "9999999"
+    command:
+    - "sleep"
+    image: "me-central2-docker.pkg.dev/prj-adc-gcp-devsecops/adc-jenkins-agents-img/coverity-img:java25-v2.0"
+    imagePullPolicy: "IfNotPresent"
+    name: "coverity-agent"
+    resources: {}
+    tty: false
+    volumeMounts:
+    - mountPath: "/home/jenkins/agent"
+      name: "workspace-volume"
+      readOnly: false
+    workingDir: "/home/jenkins/agent"
+  - args:
+    - "9999999"
+    command:
+    - "sleep"
+    image: "me-central2-docker.pkg.dev/prj-adc-gcp-devsecops/adc-jenkins-agents-img/sdk-img:v1.0"
+    imagePullPolicy: "IfNotPresent"
+    name: "sdk-agent"
+    resources: {}
+    tty: false
+    volumeMounts:
+    - mountPath: "/home/jenkins/agent"
+      name: "workspace-volume"
+      readOnly: false
+    workingDir: "/home/jenkins/agent"
+  hostNetwork: false
+  initContainers:
+  - command:
+    - "/bin/sh"
+    - "-c"
+    - "cp $(command -v jenkins-agent) /jenkins-agent/jenkins-agent;cp -R /usr/share/jenkins/.\
+      \ /jenkins-agent"
+    image: "jenkins/inbound-agent:3345.v03dee9b_f88fc-1"
+    name: "set-up-jenkins-agent"
+    volumeMounts:
+    - mountPath: "/jenkins-agent"
+      name: "jenkins-agent"
+  nodeSelector:
+    cloud.google.com/gke-nodepool: "npool-jenkins-agent-ext-std-01"
+  restartPolicy: "Never"
+  serviceAccountName: "jenkins-ksa"
+  volumes:
+  - emptyDir:
+      medium: ""
+    name: "workspace-volume"
+  - emptyDir: {}
+    name: "jenkins-agent"
+hostAliases:
+- ip: "10.245.1.130"
+  hostnames:
+  - "cnc.ad.aramcodigital.com"
+- ip: "10.245.1.155"
+  hostnames:
+  - "blackduck.ad.aramcodigital.com"
+
+Running on jenkins-agent-webapp-tt46c
+ in /home/jenkins/agent/workspace/elopment_aramco-digital-cms_main
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+The recommended git tool is: NONE
+using credential GITLAB_CRED
+Cloning the remote Git repository
+Cloning with configured refspecs honoured and without tags
+Cloning repository https://gitlab-dev.ad.aramcodigital.com/adc-solutions-development/aramco-digital-cms.git
+ > git init /home/jenkins/agent/workspace/elopment_aramco-digital-cms_main # timeout=10
+Fetching upstream changes from https://gitlab-dev.ad.aramcodigital.com/adc-solutions-development/aramco-digital-cms.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.39.5'
+using GIT_ASKPASS to set credentials GITLAB_CRED (Created By Madhu)
+ > git fetch --no-tags --force --progress -- https://gitlab-dev.ad.aramcodigital.com/adc-solutions-development/aramco-digital-cms.git +refs/heads/main:refs/remotes/origin/main # timeout=10
+
+Avoid second fetch
+Checking out Revision 705698e8f419e037b8f095af655d6ae6a5e8d59f (main)
+
+ > git config remote.origin.url https://gitlab-dev.ad.aramcodigital.com/adc-solutions-development/aramco-digital-cms.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/main:refs/remotes/origin/main # timeout=10
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 705698e8f419e037b8f095af655d6ae6a5e8d59f # timeout=10
+
+Commit message: "Security and CMS sync: env policy, Jenkins secrets, dependency overrides"
+ > git rev-list --no-walk 705698e8f419e037b8f095af655d6ae6a5e8d59f # timeout=10
+[GitLab Pipeline Status] Notifying branch build status: RUNNING adc-solutions-development/build/adc-solutions-development/adc-solutions-development%2Faramco-digital-cms/main #10: Build started...
+[GitLab Pipeline Status] Notified
+
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Repository policy)
+[Pipeline] sh
++ node --version
+/home/jenkins/agent/workspace/elopment_aramco-digital-cms_main@tmp/durable-0b72b092/script.sh.copy: 2: node: not found
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Coverity Scan)
+Stage "Coverity Scan" skipped due to earlier failure(s)
+[Pipeline] getContext
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+
+[Pipeline] { (Black Duck Scan)
+Stage "Black Duck Scan" skipped due to earlier failure(s)
+[Pipeline] getContext
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build & Push Image)
+Stage "Build & Push Image" skipped due to earlier failure(s)
+[Pipeline] getContext
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy to Cloud Run)
+Stage "Deploy to Cloud Run" skipped due to earlier failure(s)
+[Pipeline] getContext
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] }
+[Pipeline] // podTemplate
+[Pipeline] End of Pipeline
+ERROR: script returned exit code 127
+[GitLab Pipeline Status] Notifying branch build status: FAILED adc-solutions-development/build/adc-solutions-development/adc-solutions-development%2Faramco-digital-cms/main #10: There was a failure building this commit.
+[GitLab Pipeline Status] Notified
+
+Finished: FAILURE
