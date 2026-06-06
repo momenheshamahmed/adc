@@ -1,3 +1,5 @@
 Gitlab:
 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID0CZ4B5cHne/ZLuR5GSqJYf1nyrtbXnebcZjOVYwK6/ momen.osman@aramcodigital.com
 
+Gitlab Access Token:
+glpat-RNSk72llITtX0F2pENDcSG86MQp1OjM0CA.01.0y18w3zfk
