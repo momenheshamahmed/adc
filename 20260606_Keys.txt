@@ -1,0 +1,3 @@
+Gitlab:
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID0CZ4B5cHne/ZLuR5GSqJYf1nyrtbXnebcZjOVYwK6/ momen.osman@aramcodigital.com
+
